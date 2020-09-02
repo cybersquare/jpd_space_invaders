@@ -2,7 +2,7 @@ import MySQLdb
 
 def login(username, user_password):
     try:
-        db_connection = MySQLdb.connect(user='root', password='MyNewPass', host='localhost', database='db_pygame')
+        db_connection = MySQLdb.connect(user='root', password='Your password', host='localhost', database='db_pygame')
         cursor = db_connection.cursor()
         sql = "select * from tbl_user where username = %s and password = %s"
         val=(username, user_password)
@@ -19,7 +19,7 @@ def login(username, user_password):
 
 def register(username, user_password, name, gender):
     try:
-        db_connection = MySQLdb.connect(user='root', password='MyNewPass', host='localhost', database='db_pygame')
+        db_connection = MySQLdb.connect(user='root', password='Your password', host='localhost', database='db_pygame')
         cursor = db_connection.cursor()
         sql = "INSERT INTO tbl_user(username, password, full_name, gender) VALUES(%s, %s, %s, %s )"
         val=(username, user_password, name, gender)
