@@ -4,23 +4,16 @@ import math
 import pygame_gui
 import game_db
 
-
 # Initialize  pygame
 pygame.init()
 
-
 # Create window
 screen = pygame.display.set_mode((800,600))
-
-# Background
-# background = pygame.image.load("images/background.png")
 
 # Title and icon
 pygame.display.set_caption("Cybersquare - Space invaders")
 icon = pygame.image.load("images/cs_logo.png")
 pygame.display.set_icon(icon)
-
-
 
 background = pygame.Surface((800, 600))
 background.fill(pygame.Color('#ffffff'))
@@ -28,42 +21,31 @@ background.fill(pygame.Color('#ffffff'))
 logged_user = ""
 
 manager = pygame_gui.UIManager((800, 600))
-# full name
-# Username/ email id
-# password
-# Gender
 
-# Login / registation selection - Panel
+# Login / registation selection - Panel (Username, password and login button)
 panel_select= pygame_gui.elements.ui_panel.UIPanel(pygame.Rect((150, 200), (550, 150)), 
                                                 manager= manager, starting_layer_height=5)
-
 btn_show_login=pygame_gui.elements.UIButton(relative_rect=pygame.Rect((100, 50), (100, 25)), text='Login',
                                                 manager=manager, container=panel_select)
-
 btn_show_register=pygame_gui.elements.UIButton(relative_rect=pygame.Rect((300, 50), (100, 25)), text='Register',
                                                 manager=manager, container=panel_select)
 
 
-
-# Registration form - Panel
+# Registration form - Panel (Full name, username, password, gender, and register button)
 panel_reg = pygame_gui.elements.ui_panel.UIPanel(pygame.Rect((150, 100), (550, 350)), 
                                                 manager= manager, starting_layer_height=2)
-
 lbl_name = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((50, 50), (200, 25)), 
                                                 manager= manager, text="Full name", container=panel_reg)
 txt_name = pygame_gui.elements.ui_text_entry_line.UITextEntryLine(relative_rect= pygame.Rect((300,50), (200, 50)), 
                                                                 manager= manager, container=panel_reg)
-
 lbl_uname = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((50, 100), (200, 25)), container=panel_reg,
                                                 manager= manager, text="Email/ Username" )
 txt_username = pygame_gui.elements.ui_text_entry_line.UITextEntryLine(relative_rect= pygame.Rect((300, 100), (200, 50)), 
                                                 manager= manager, container=panel_reg)
-
 lbl_passwrod = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((50, 150), (200, 25)), container=panel_reg,
                                                 manager= manager, text="Password")
 txt_password = pygame_gui.elements.ui_text_entry_line.UITextEntryLine(relative_rect= pygame.Rect((300, 150), (200, 50)), 
                                                 manager= manager, container=panel_reg)
-
 lbl_gender = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((50, 200), (200, 25)), container=panel_reg,
                                                 manager= manager, text="Gender")
 dd_lst_gender = pygame_gui.elements.ui_drop_down_menu.UIDropDownMenu(relative_rect= pygame.Rect((300, 200), (200, 25)), 
@@ -83,17 +65,13 @@ btn_play_game = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((300, 5),
 panel_reg_msg.hide()
 panel_reg.hide()
 
-
-
 # Login panel
 panel_login = pygame_gui.elements.ui_panel.UIPanel(pygame.Rect((150, 100), (550, 250)), 
                                                 manager= manager, starting_layer_height=1)
-
 lbl_luname = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((50, 50), (200, 25)), container=panel_login,
                                                 manager= manager, text="Email/ Username" )
 txt_lusername = pygame_gui.elements.ui_text_entry_line.UITextEntryLine(relative_rect= pygame.Rect((300, 50), (200, 50)), 
                                                 manager= manager, container=panel_login)
-
 lbl_lpasswrod = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((50, 100), (200, 25)), container=panel_login,
                                                 manager= manager, text="Password")
 txt_lpassword = pygame_gui.elements.ui_text_entry_line.UITextEntryLine(relative_rect= pygame.Rect((300, 100), (200, 50)), 
@@ -101,11 +79,8 @@ txt_lpassword = pygame_gui.elements.ui_text_entry_line.UITextEntryLine(relative_
 btn_login = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((250, 150), (100, 25)), text='Login',
                                                 manager=manager, container=panel_login)
 lbl_login_msg = pygame_gui.elements.ui_label.UILabel(relative_rect= pygame.Rect((100, 170), (250, 25)), container=panel_login,
-                                                manager= manager, text="Incorrect username or password")
-                                                
+                                                manager= manager, text="Incorrect username or password")                                             
 panel_login.hide()
-
-
 
 # Player spaceship
 playerImg = pygame.image.load("images/spaceship.png")
@@ -113,7 +88,6 @@ playerImg = pygame.transform.scale(playerImg, (64, 128))
 playerX = 370
 playerY = 480
 playerX_change = 0
-
 
 # Player enemy
 enemyImg = pygame.image.load("images/enemy1.png")
@@ -137,6 +111,7 @@ score = 0
 font = pygame.font.Font('freesansbold.ttf', 32)
 textX = 10
 textY = 10
+
 
 def show_score(x, y):
     display_score = font.render("Score: " + str(score), True, (255, 255, 255))
@@ -168,16 +143,10 @@ def isCollision(enemyX, enemyY, bulletX, bulletY):
         return False
 
 
-# root = tk.Tk()
-# root.attributes("-topmost", True)
-# root.withdraw()
-# messagebox.showinfo("subject", "content")
-
-
-
 status=0
 clock = pygame.time.Clock()
 is_running = True
+
 
 # Game loop
 while is_running:
@@ -257,7 +226,6 @@ while is_running:
         # Update positions
         player(playerX, playerY)
         emeny(enemyX, enemyY)
-        pygame.display.update()
 
     else:
         time_delta = clock.tick(60)/1000.0
@@ -281,7 +249,7 @@ while is_running:
                         panel_select.hide()
                         panel_reg.show()
                         panel_reg_msg.hide()
-
+                    # Registration
                     if event.ui_element == btn_signup:
                         name = txt_name.get_text()
                         username = txt_username.get_text()
@@ -292,28 +260,11 @@ while is_running:
                         if result:
                             logged_user = username
                             panel_reg_msg.show()
-
-                        # try:
-                        #     db_connection = MySQLdb.connect(user='root', password='MyNewPass', host='localhost', database='db_pygame')
-                        #     cursor = db_connection.cursor()
-                        #     sql = "INSERT INTO tbl_user(username, password, full_name, gender) VALUES(%s, %s, %s, %s )"
-                        #     val=(username, user_password, name, gender)
-                        #     cursor.execute(sql, val)
-                        #     db_connection.commit()
-                        #     print(db_connection.insert_id())
-                        #     print(cursor.lastrowid)
-                        #     db_connection.close()
-                        #     logged_user = username
-                        #     panel_reg_msg.show()
-                        # except Exception as e:
-                        #     print("Database error occured")
-                        #     print(e)
-
+                    # Play game after registration
                     if event.ui_element == btn_play_game:
                         background = pygame.image.load("images/background.png")
                         status=1
-                        
-
+                    # Login button 
                     if event.ui_element == btn_login:
                         username = txt_lusername.get_text()
                         user_password = txt_lpassword.get_text()
@@ -332,7 +283,7 @@ while is_running:
         screen.blit(background, (0, 0))
         manager.draw_ui(screen)
 
-        pygame.display.update()
+    pygame.display.update()
 
 
 
