@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 import random
 import math
 
@@ -84,6 +84,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            pygame.quit()
+            sys.exit()
 
 
         # Handle key strokes left and right
@@ -147,7 +149,7 @@ while running:
 
     # show the  score
     show_score(textX, textY)
-    
+
     # Update positions
     player(playerX, playerY)
     emeny(enemyX, enemyY)
