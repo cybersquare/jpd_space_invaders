@@ -1,7 +1,7 @@
 # Space Invaders is a popular video game created by Tomohiro Nishikado in 1978. 
 # It was manufactured and sold by Taito in Japan. 
 # Space Invaders is a shooting game  in which aliens come to attack earth and human beings
-# use spaceship fro shoothing them down.
+# use spaceship for shooting them down.
 
 
 import pygame, sys
