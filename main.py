@@ -128,7 +128,7 @@ while running:
     enemyX += enemyX_change
     if enemyX < 0:
         enemyX_change = 1  # Change the direction of movement to right when reaches at left side
-        enemyY += enemyY_change # Change Y positio of the enemy
+        enemyY += enemyY_change # Change Y position of the enemy
     elif enemyX > 736:
         enemyX_change = -1 # Change the direction of movement to left when reaches at right side
         enemyY += enemyY_change
