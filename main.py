@@ -1,3 +1,9 @@
+# Space Invaders is a popular video game created by Tomohiro Nishikado in 1978. 
+# It was manufactured and sold by Taito in Japan. 
+# Space Invaders is a shooting game  in which aliens come to attack earth and human beings
+# use spaceship fro shoothing them down.
+
+
 import pygame, sys
 import random
 import math
@@ -60,7 +66,7 @@ def emeny(x, y):
     screen.blit(enemyImg,(x, y))
 
 
-def fire_bullet(x, y):
+def fire_bullet(x, y): # Movement of bullet
     global bullet_state
     bullet_state = "fire"
     screen.blit(bulletImg,(x+16, y+10))
@@ -113,18 +119,18 @@ while running:
     playerX += playerX_change
 
     # Set the movement limit to size of the window
-    if playerX < 0:
+    if playerX < 0: # Move the player to zero when the player goes beyond left edge
         playerX = 0
-    elif playerX > 736:
+    elif playerX > 736: # Move the player inside the screen when the player goes beyond right edge
         playerX = 736
 
     # Enemy movement
     enemyX += enemyX_change
     if enemyX < 0:
-        enemyX_change = 1
-        enemyY += enemyY_change
+        enemyX_change = 1  # Change the direction of movement to right when reaches at left side
+        enemyY += enemyY_change # Change Y positio of the enemy
     elif enemyX > 736:
-        enemyX_change = -1
+        enemyX_change = -1 # Change the direction of movement to left when reaches at right side
         enemyY += enemyY_change
 
     # Bullet movement
