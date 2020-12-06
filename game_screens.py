@@ -1,6 +1,6 @@
 import pygame
 import pygame_gui
-import MySQLdb
+
 
 
 
@@ -19,6 +19,7 @@ manager = pygame_gui.UIManager((800, 600), "theme.json")
 # Gender
 
 # Start screen for selecting login or registration
+# This screen will have two butto for selecting login or register
 panel_select= pygame_gui.elements.ui_panel.UIPanel(pygame.Rect((150, 200), (550, 150)), 
                                                 manager= manager, starting_layer_height=3)
 
@@ -28,7 +29,7 @@ btn_show_login=pygame_gui.elements.UIButton(relative_rect=pygame.Rect((100, 50),
 btn_show_register=pygame_gui.elements.UIButton(relative_rect=pygame.Rect((300, 50), (100, 25)), text='Register',
                                                 manager=manager, container=panel_select)
 
-# Registration form
+# Registration form. Initially it will be hidden. 
 panel_reg = pygame_gui.elements.ui_panel.UIPanel(pygame.Rect((150, 100), (550, 350)), 
                                                 manager= manager, starting_layer_height=2)
 
@@ -68,7 +69,7 @@ panel_reg.hide()
 
 
 
-# Login panel
+# Login panel. Will be hidden initially
 panel_login = pygame_gui.elements.ui_panel.UIPanel(pygame.Rect((150, 100), (550, 250)), 
                                                 manager= manager, starting_layer_height=1)
 
@@ -90,9 +91,6 @@ panel_login.hide()
 
 
 
-
-
-
 is_running = True
 clock = pygame.time.Clock()
 while is_running:
@@ -102,77 +100,29 @@ while is_running:
             is_running = False
         if event.type == pygame.USEREVENT:
             if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == btn_signup:
-                    # print('Hello World!')
-                    print(txt_name.get_text())
-                    print(dd_lst_gender.selected_option)
-                if event.ui_element == btn_show_login:
+                if event.ui_element == btn_show_login: # Show login panel and hide all other panels
                     panel_select.hide()
                     panel_login.show()
                     lbl_login_msg.hide()
-                if event.ui_element == btn_show_register:
+                if event.ui_element == btn_show_register: # Show register panel and hide all other panels
                     panel_select.hide()
                     panel_reg.show()
                     panel_reg_msg.hide()
-                if event.ui_element == btn_signup:
+                if event.ui_element == btn_signup: # Write code for registration inside this if block
                     name = txt_name.get_text()
                     username = txt_username.get_text()
                     user_password = txt_password.get_text()
                     gender = dd_lst_gender.selected_option
                     print(name, username, user_password, gender)
-                    try:
-                        db_connection = MySQLdb.connect(user='root', password='MyNewPass', host='localhost', database='db_pygame')
-                        cursor = db_connection.cursor()
-                        sql = "INSERT INTO tbl_user(username, password, full_name, gender) VALUES(%s, %s, %s, %s )"
-                        val=(username, user_password, name, gender)
-                        cursor.execute(sql, val)
-                        db_connection.commit()
-                        print(db_connection.insert_id())
-                        print(cursor.lastrowid)
-                        db_connection.close()
-                        logged_user = username
-                        panel_reg_msg.show()
-                    except Exception as e:
-                        print("Database error occured")
-                        print(e)
 
-                if event.ui_element == btn_login:
+                if event.ui_element == btn_login: # Write code for login inside this if block
                     username = txt_lusername.get_text()
                     user_password = txt_lpassword.get_text()
-                    try:
-                        db_connection = MySQLdb.connect(user='root', password='MyNewPass', host='localhost', database='db_pygame')
-                        cursor = db_connection.cursor()
-                        sql = "select * from tbl_user where username = %s and password = %s"
-                        val=(username, user_password)
-                        cursor.execute(sql, val)
-                        results = cursor.fetchall() 
-                        if results:
-                            print("Login success")
-                        else:
-                            lbl_login_msg.show()
-                            print("Login fail") 
-                    except Exception as e:
-                        print("Database error occured")
-                        print(e)
+                    print(username, user_password)
+  
         manager.process_events(event)
     manager.update(time_delta)
     window_surface.blit(background, (0, 0))
     manager.draw_ui(window_surface)
 
     pygame.display.update()
-
-
-
-
-
-
-
-
-# CREATE TABLE tbl_user(
-# user_id INT AUTO_INCREMENT,
-# username VARCHAR(100) unique,
-# password VARCHAR(200),
-# full_name VARCHAR(200),
-# gender VARCHAR(200),
-# PRIMARY KEY(user_id)
-# );

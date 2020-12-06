@@ -151,10 +151,6 @@ while is_running:
 
 
 
-
-
-
-
 # CREATE TABLE tbl_user(
 # user_id INT AUTO_INCREMENT,
 # username VARCHAR(100) unique,
