@@ -1,4 +1,6 @@
 import MySQLdb
+# If you are using mysql.connector replace the firsl line with following line
+# import mysql.connector as MySQLdb
 
 def login(username, user_password):
     try:
