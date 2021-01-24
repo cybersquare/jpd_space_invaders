@@ -3,9 +3,6 @@ import random
 import math
 import pygame_gui
 import game_db
-import tkinter as tk
-from tkinter import messagebox
-
 
 
 # Initialize  pygame
