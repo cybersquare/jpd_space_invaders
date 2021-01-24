@@ -296,17 +296,10 @@ while is_running:
                             lbl_login_msg.show()
                             print("Login fail") 
 
-        manager.process_events(event)
+            manager.process_events(event)
         manager.update(time_delta)
         screen.blit(background, (0, 0))
         manager.draw_ui(screen)
     
     pygame.display.update()
     
-
-
-
-# root = tk.Tk()
-# root.attributes("-topmost", True)
-# root.withdraw()
-# messagebox.showinfo("subject", "content")
